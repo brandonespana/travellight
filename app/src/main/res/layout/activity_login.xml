@@ -16,7 +16,7 @@
         android:singleLine="true"
         android:text="Email"
         android:background="@android:drawable/editbox_background_normal"
-        android:paddingLeft="25%dp" />
+        android:paddingLeft="25dp" />
 
     <EditText
         android:layout_width="match_parent"
