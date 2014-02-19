@@ -7,20 +7,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class login extends ActionBarActivity {
+public class MainScreen extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_main_screen);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.actionbar_actions, menu);
+        
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.login, menu);
+        getMenuInflater().inflate(R.menu.actionbar_actions, menu);
         return true;
     }
 
@@ -36,18 +36,19 @@ public class login extends ActionBarActivity {
             case R.id.action_home:
                 goToMain();
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
+    public void goToHelp(){
+       Intent intent = new Intent(this, HelpActivity.class);
+       startActivity(intent);
+    }
     public void goToMain(){
         Intent intent = new Intent (this, MainScreen.class);
         startActivity(intent);
     }
-    public void goToHelp(){
-        Intent intent = new Intent(this,HelpActivity.class);
-        startActivity(intent);
-    }
+
 }
