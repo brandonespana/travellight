@@ -1,26 +1,28 @@
 package groupo.travellight.app;
 
-import android.content.Intent;
+/**
+ * Created by Brandon on 2/15/14.
+ */
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.content.Intent;
 
-public class login extends ActionBarActivity {
+public class HelpActivity extends ActionBarActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_help_screen);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.actionbar_actions, menu);
+
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.login, menu);
+        getMenuInflater().inflate(R.menu.actionbar_actions, menu);
         return true;
     }
 
@@ -38,7 +40,7 @@ public class login extends ActionBarActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
+       }
 
     }
 
