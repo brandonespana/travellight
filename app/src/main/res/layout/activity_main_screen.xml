@@ -4,4 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="groupo.travellight.app.MainScreen"
-    tools:ignore="MergeRootFrame" />
+    tools:ignore="MergeRootFrame" >
+
+    <Button
+        android:id="@+id/NotificationTest"
+        android:layout_width="201dp"
+        android:layout_height="158dp"
+        android:text="Notification Test"
+        android:layout_gravity="center"
+        android:onClick="activateNotification" />
+
+    <TextView
+        android:layout_width="108dp"
+        android:layout_height="132dp"
+        android:id="@+id/countDisplays"
+        android:text=""
+        android:layout_gravity="center_horizontal|bottom" />
+</FrameLayout>

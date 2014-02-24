@@ -1,18 +1,33 @@
 package groupo.travellight.app;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainScreen extends ActionBarActivity {
 
+    public int notificationCount=0;
+    private TextView countDisplay;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        String message=""+notificationCount;
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        countDisplay=(TextView) findViewById(R.id.countDisplays);
+        countDisplay.setText(message);
     }
 
 
@@ -49,6 +64,31 @@ public class MainScreen extends ActionBarActivity {
     public void goToMain(){
         Intent intent = new Intent (this, MainScreen.class);
         startActivity(intent);
+    }
+
+    public void activateNotification(){
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.abc_ab_bottom_solid_dark_holo)
+                        .setContentTitle("My notification")
+                        .setContentText("Hello World!");
+        Intent resultIntent = new Intent(this, HelpActivity.class);
+
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+        //issue the notification:
+        int mNotificationId =001;
+        NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mNotifyMgr.notify(mNotificationId,mBuilder.build());
+
+
     }
 
 }
