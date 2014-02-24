@@ -66,13 +66,13 @@ public class MainScreen extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void activateNotification(){
+    public void activateNotification(View view){
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.abc_ab_bottom_solid_dark_holo)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
+                        .setContentTitle("IMPORTAT MESSAGE")
+                        .setContentText("Notifications Test");
         Intent resultIntent = new Intent(this, HelpActivity.class);
 
         PendingIntent resultPendingIntent =
@@ -88,6 +88,10 @@ public class MainScreen extends ActionBarActivity {
         NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mNotifyMgr.notify(mNotificationId,mBuilder.build());
 
+
+    }
+    public void setTheText(){
+        countDisplay.setText("what?");
 
     }
 
