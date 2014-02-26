@@ -27,10 +27,13 @@
             android:name="groupo.travellight.app.MainScreen"
             android:label="MainScreen" >
         </activity>
-
         <activity
             android:name="groupo.travellight.app.HelpActivity"
-            android:label="HelpActivity">
+            android:label="HelpActivity" >
+        </activity>
+        <activity
+            android:name="groupo.travellight.app.TripsActivity"
+            android:label="@string/title_activity_trips" >
         </activity>
 
         <activity android:name="groupo.travellight.app.NotificationsActivity"
