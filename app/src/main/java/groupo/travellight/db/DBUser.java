@@ -90,9 +90,9 @@ public class DBUser {
     }
 
     //---deletes a particular record---
-    public boolean deleteContact(long rowId)
+    public boolean deleteContact(String email)
     {
-        return db.delete(DATABASE_TABLE, KEY_EMAIL + "=" + rowId, null) > 0;
+        return db.delete(DATABASE_TABLE, KEY_EMAIL + "=" + email, null) > 0;
     }
 
     //---retrieves all the records---
