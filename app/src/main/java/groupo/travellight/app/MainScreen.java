@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainScreen extends ActionBarActivity {
 
     public int notificationCount=0;
+    public int layoutindex=1;
     private TextView countDisplay;
 
     @Override
@@ -89,12 +91,23 @@ public class MainScreen extends ActionBarActivity {
 
 
     }
-    public void setTheText(View view){
+    public void increaseCount(View view){
         notificationCount++;
-        countDisplay.setText(""+notificationCount);
-        if (notificationCount==3){
-            activateNotification(01,"Count 3","Count has reached 3","Count Increased!");
+        countDisplay.setText("" + notificationCount);
+        if (notificationCount>2){
+            activateNotification(01,"Count 3","Count has reached 3","Count Increased to 3!");
+            addTextView("Count Increased to "+notificationCount+ "!");
         }
+
+    }
+    public void addTextView(String message){
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                                            RelativeLayout.LayoutParams.WRAP_CONTENT);
+        layoutindex++;
+        RelativeLayout rl = (RelativeLayout)findViewById(R.id.container);
+        TextView textView = new TextView(getBaseContext());
+        textView.setText(message);
+        rl.addView(textView,layoutindex,params);
 
     }
 
