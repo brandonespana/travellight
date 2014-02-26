@@ -16,14 +16,11 @@ public class MainScreen extends ActionBarActivity {
     public int notificationCount=0;
     private TextView countDisplay;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         String message=""+notificationCount;
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         countDisplay=(TextView) findViewById(R.id.countDisplays);
@@ -66,13 +63,14 @@ public class MainScreen extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void activateNotification(View view){
-
+    public void activateNotification(int id,String contentTitle, String contentText, String ticker){
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.abc_ab_bottom_solid_dark_holo)
-                        .setContentTitle("IMPORTAT MESSAGE")
-                        .setContentText("Notifications Test");
+                        .setContentTitle(contentTitle)
+                        .setContentText(contentText)
+                        .setTicker(ticker)
+                        .setAutoCancel(true);
         Intent resultIntent = new Intent(this, HelpActivity.class);
 
         PendingIntent resultPendingIntent =
@@ -83,15 +81,20 @@ public class MainScreen extends ActionBarActivity {
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
         mBuilder.setContentIntent(resultPendingIntent);
+
         //issue the notification:
         int mNotificationId =001;
         NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        mNotifyMgr.notify(mNotificationId,mBuilder.build());
+        mNotifyMgr.notify(id,mBuilder.build());
 
 
     }
-    public void setTheText(){
-        countDisplay.setText("what?");
+    public void setTheText(View view){
+        notificationCount++;
+        countDisplay.setText(""+notificationCount);
+        if (notificationCount==3){
+            activateNotification(01,"Count 3","Count has reached 3","Count Increased!");
+        }
 
     }
 

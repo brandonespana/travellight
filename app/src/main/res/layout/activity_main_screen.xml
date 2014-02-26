@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
@@ -6,18 +6,30 @@
     tools:context="groupo.travellight.app.MainScreen"
     tools:ignore="MergeRootFrame" >
 
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:textSize="30dp"
+        android:id="@+id/countDisplays"
+        android:text="Count"
+        android:layout_gravity="center_horizontal"/>
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:id="@+id/countbutton"
+        android:text="Count Dislay"
+        android:onClick="setTheText"
+        android:layout_toRightOf="@+id/countDisplays"/>
     <Button
         android:id="@+id/NotificationTest"
         android:layout_width="201dp"
         android:layout_height="158dp"
         android:text="Notification Test"
-        android:layout_gravity="center"
+        android:layout_below="@+id/countbutton"
+        android:layout_toRightOf="@+id/countDisplays"
         android:onClick="activateNotification" />
 
-    <TextView
-        android:layout_width="108dp"
-        android:layout_height="132dp"
-        android:id="@+id/countDisplays"
-        android:text=""
-        android:layout_gravity="center_horizontal|bottom" />
-</FrameLayout>
+
+
+
+</RelativeLayout>
