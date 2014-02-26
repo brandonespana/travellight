@@ -22,11 +22,12 @@ public class NotificationsActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String message =""+notificationCount;
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_notifications);
         countDisplay=(TextView)findViewById(R.id.countDisplays);
-        countDisplay.setText(""+notificationCount);
+        countDisplay.setText(message);
     }
 
 

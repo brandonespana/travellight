@@ -33,7 +33,8 @@
             android:label="HelpActivity">
         </activity>
 
-        <activity android:name="groupo.travellight.app.NotificationsActivity">
+        <activity android:name="groupo.travellight.app.NotificationsActivity"
+                  android:label="Notifications">
         </activity>
     </application>
 
