@@ -98,7 +98,7 @@ public class MainScreen extends ActionBarActivity {
             activateNotification(01,"Count 3","Count has reached 3","Count Increased to 3!");
             addTextView("Count Increased to "+notificationCount+ "!");
         }
-
+    //add something
     }
     public void addTextView(String message){
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
