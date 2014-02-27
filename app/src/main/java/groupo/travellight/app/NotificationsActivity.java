@@ -1,33 +1,40 @@
 package groupo.travellight.app;
 
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
-import android.app.NotificationManager;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-/**
- * Created by Brandon on 2/25/14.
- */
 public class NotificationsActivity extends ActionBarActivity {
-    public int notificationCount=0;
-    public int layoutindex=0;
-    TextView countDisplay;
+
+    private int notificationCount=0;
+    private int layoutindex=0;
+    private TextView countDisplay;
+    private TextView notifDisplay;
+    RelativeLayout rl;
+    RelativeLayout.LayoutParams params;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String message =""+notificationCount;
+        String message=""+notificationCount;
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_notifications);
-        countDisplay=(TextView)findViewById(R.id.countDisplays);
-        countDisplay.setText(message);
+        this.countDisplay=(TextView) findViewById(R.id.countDisplays);
+        this.notifDisplay=(TextView) findViewById(R.id.notifDisplay);
+        this.rl= (RelativeLayout)findViewById(R.id.notifContainer);
+        this.params= new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        this.countDisplay.setText(message);
     }
 
 
@@ -96,21 +103,16 @@ public class NotificationsActivity extends ActionBarActivity {
         notificationCount++;
         countDisplay.setText("" + notificationCount);
         if (notificationCount>2){
-            activateNotification(01,"Count 3","Count has reached 3","Count Increased to 3!");
-            addTextView("Count Increased to "+notificationCount+ "!");
-        }
+            activateNotification(notificationCount,"Count "+notificationCount,"Count has reached "+notificationCount,"Count Increased to "+notificationCount+"!");
+            notifDisplay.setText("Count increased to "+notificationCount+"!");
 
+            //addTextView("Count Increased to "+notificationCount+ "!");""
+        }
     }
     public void addTextView(String message){
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        layoutindex++;
-        RelativeLayout rl = (RelativeLayout)findViewById(R.id.container);
-        TextView textView = new TextView(getBaseContext());
-        textView.setText(message);
-        rl.addView(textView,layoutindex,params);
-
+        //notifDisplay=new TextView(this);
+        //notifDisplay.setText(message);
+        //rl.addView(notifDisplay,params);
     }
-
 
 }
