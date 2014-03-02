@@ -35,9 +35,13 @@
             android:name="groupo.travellight.app.TripsActivity"
             android:label="@string/title_activity_trips" >
         </activity>
-
-        <activity android:name="groupo.travellight.app.NotificationsActivity"
-                  android:label="Notifications">
+        <activity
+            android:name="groupo.travellight.app.NotificationsActivity"
+            android:label="Notifications" >
+        </activity>
+        <activity
+            android:name="groupo.travellight.app.YelpSearch"
+            android:label="@string/title_activity_yelp_search" >
         </activity>
     </application>
 
