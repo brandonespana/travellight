@@ -265,9 +265,9 @@ public class LoginActivity extends Activity {
             showProgress(false);
 
             if (success) {
-                Intent intent = new Intent (getApplicationContext(), TripsActivity.class);
-                startActivity(intent);
-                //finish();
+                //Intent intent = new Intent (getApplicationContext(), TripsActivity.class);
+               // startActivity(intent);
+                finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

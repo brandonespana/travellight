@@ -19,21 +19,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="groupo.travellight.app.login"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
-        </activity>
-        <activity
             android:name="groupo.travellight.app.MainScreen"
             android:label="MainScreen" >
         </activity>
         <activity
             android:name="groupo.travellight.app.HelpActivity"
             android:label="HelpActivity" >
-        </activity>
-        <activity
-            android:name="groupo.travellight.app.TripsActivity"
-            android:label="@string/title_activity_trips" >
         </activity>
         <activity
             android:name="groupo.travellight.app.NotificationsActivity"
