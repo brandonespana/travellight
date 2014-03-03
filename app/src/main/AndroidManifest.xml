@@ -34,6 +34,10 @@
             android:name="groupo.travellight.app.YelpSearch"
             android:label="@string/title_activity_yelp_search" >
         </activity>
+        <activity
+            android:name=".PackingListActivity"
+            android:label="Packing List" >
+            </activity>
     </application>
 
 </manifest>
