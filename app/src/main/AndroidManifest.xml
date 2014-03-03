@@ -14,11 +14,6 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="groupo.travellight.app.login"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
-        </activity>
-        <activity
             android:name="groupo.travellight.app.MainScreen"
             android:label="MainScreen" >
         </activity>
@@ -40,6 +35,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PackingListActivity"
+            android:label="Packing List" >
+            </activity>
     </application>
 
 </manifest>
