@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- App General Strings -->
     <string name="app_name">Travellight</string>
+
+    <!-- Yelp Activity Strings -->
     <string name="actionbar_yelp">Search</string>
-    <string name="title_activity_logon">LogonActivity</string>
+    <string name="title_activity_yelp_search">Yelp Search</string>
+
+    <!-- Main Screen Strings -->
     <string name="title_activity_main_screen">MainScreen</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <!--Login screen Strings -->
+    <string name="title_activity_logon">LogonActivity</string>
+
+    <!-- Trips Activity Strings -->
     <string name="title_activity_trips">TripsActivity</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_yelp_search">Yelp Search</string>
+
+    <!-- Strings related to login -->
+    <string name="title_activity_login">Sign in</string>
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">"Password"</string>
+
+    <string name="action_sign_in_register"><b>Sign in</b> or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+
+    <string name="action_forgot_password">Recover lost password</string>
+
+    <string name="login_progress_signing_in">Signing in&#8230;</string>
+
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
 
 </resources>
