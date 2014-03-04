@@ -1,3 +1,5 @@
+package groupo.travellight.yelp;
+
 import org.scribe.model.Token;
 import org.scribe.builder.api.DefaultApi10a;
 

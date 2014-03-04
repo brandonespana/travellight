@@ -5,8 +5,7 @@
     <string name="app_name">Travellight</string>
 
     <!-- Yelp Activity Strings -->
-    <string name="actionbar_yelp">Search</string>
-    <string name="title_activity_yelp_search">Yelp Search</string>
+    <string name="title_activity_yelp_search"></string>
 
     <!-- Main Screen Strings -->
     <string name="title_activity_main_screen">MainScreen</string>

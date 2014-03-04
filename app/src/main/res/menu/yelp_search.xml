@@ -5,13 +5,7 @@
 
     <!--Action Bar Search -->
     <item android:id="@+id/yelp_searchmenu"
-        android:title="@string/actionbar_yelp"
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="ifRoom|collapseActionView|withText"
         app:actionViewClass="android.support.v7.widget.SearchView"/>
-
-    <!-- Placeholder for settings -->
-    <item android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
 </menu>
