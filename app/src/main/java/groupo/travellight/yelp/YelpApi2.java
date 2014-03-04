@@ -19,6 +19,7 @@ public class YelpApi2 extends DefaultApi10a {
   @Override
   public String getRequestTokenEndpoint() {
     return null;
+
   }
 
 }
