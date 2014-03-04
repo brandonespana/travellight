@@ -1,5 +1,7 @@
 package groupo.travellight.app;
 
+import android.app.ActionBar;
+import android.app.FragmentTransaction;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -26,6 +28,9 @@ public class NotificationsActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         String message=""+notificationCount;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
@@ -35,6 +40,32 @@ public class NotificationsActivity extends ActionBarActivity {
         this.params= new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         this.countDisplay.setText(message);
+
+        final ActionBar actionBar = getActionBar();
+
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        //TODO: Convert the activities into Fragments for the tabs(Yelp, Packing List, Calendar(not created yet), More )
+        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+            @Override
+            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+                Intent newTabIntent = new Intent(this, HelpActivity.class);
+            }
+
+            @Override
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+            }
+
+            @Override
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+            }
+        };
+
+        actionBar.addTab(actionBar.newTab().setText("Yelp").setTabListener(tabListener));
+        actionBar.addTab(actionBar.newTab().setText("Packing List").setTabListener(tabListener));
+        actionBar.addTab(actionBar.newTab().setText("Calendar").setTabListener(tabListener));
+        actionBar.addTab(actionBar.newTab().setText("More").setTabListener(tabListener));
     }
 
 
