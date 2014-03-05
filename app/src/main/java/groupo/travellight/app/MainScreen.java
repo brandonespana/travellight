@@ -45,9 +45,6 @@ public class MainScreen extends ActionBarActivity {
             case R.id.action_packing_list:
                 goToPackingList();
                 return true;
-            case R.id.action_yelp:
-                goToYelpPage();
-                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -72,10 +69,6 @@ public class MainScreen extends ActionBarActivity {
     }
     public void goToPackingList(){
         Intent intent = new Intent(this,PackingListActivity.class);
-        startActivity(intent);
-    }
-    public void goToYelpPage(){
-        Intent intent = new Intent(this,YelpSearch.class);
         startActivity(intent);
     }
 
