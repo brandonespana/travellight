@@ -4,11 +4,13 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -241,6 +243,7 @@ public class LoginActivity extends Activity {
             Cursor c = db.getRecord(mEmail);
 
             if (c.getCount() != 0){
+                Log.d("pword", c.getString(c.getColumnIndex("password")));
                 return c.getString(c.getColumnIndex("password")).equals(mPassword);
             }
 
@@ -267,11 +270,24 @@ public class LoginActivity extends Activity {
                // startActivity(intent);
                 //finish();
 
-                //Intent intent = new Intent (getApplicationContext(), TripsActivity.class);
-               // startActivity(intent);
-                finish();
 
-            } else {
+
+                //
+                String filePath = getApplicationContext().getFilesDir().getPath().toString() + "/" + mEmail;
+               File file = new File(filePath);
+                if (!file.exists()){
+                    file.mkdir();
+                }
+
+
+                Intent intent = new Intent (getApplicationContext(), TripActivity.class);
+                intent.putExtra("LOGIN_EMAIL", mEmail);
+               startActivity(intent);
+
+
+
+                }
+                else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
