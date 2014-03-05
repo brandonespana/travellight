@@ -4,8 +4,7 @@
     tools:context="groupo.travellight.app.YelpSearch" >
 
     <!--Action Bar Search -->
-    <item android:id="@+id/yelp_searchmenu"
+    <item android:id="@+id/menu_yelpsearch"
         android:icon="@android:drawable/ic_menu_search"
-        app:showAsAction="ifRoom|collapseActionView|withText"
-        app:actionViewClass="android.support.v7.widget.SearchView"/>
+        android:showAsAction="ifRoom"/>
 </menu>

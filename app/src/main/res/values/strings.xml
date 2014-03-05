@@ -7,6 +7,9 @@
     <!-- Yelp Activity Strings -->
     <string name="title_activity_yelp_search"></string>
 
+    <!-- Searchable Activity Strings -->
+    <string name="search_hint">Search Activities</string>
+
     <!-- Main Screen Strings -->
     <string name="title_activity_main_screen">MainScreen</string>
     <string name="title_activity_main">MainActivity</string>
@@ -41,9 +44,7 @@
     <string name="hello_world">Hello world!</string>
     <string name = "drawer_close"> Please work</string>
     <string name = "drawer_open"> Please work</string>
-
     <string name="title_activity_events_bag">EventsBag</string>
     <string name="My_Events">My Events</string>
-
 
 </resources>
