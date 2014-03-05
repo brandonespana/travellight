@@ -46,7 +46,8 @@
         </activity>
         <activity
             android:name=".PackingListActivity"
-            android:label="Packing List" >
+            android:label="Packing List"
+            android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
