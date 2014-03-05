@@ -8,7 +8,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/travellight"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light">
         <uses-sdk android:minSdkVersion="19" />
@@ -44,6 +44,10 @@
         <activity
             android:name="groupo.travellight.app.NotificationsActivity"
             android:label="Notifications" >
+        </activity>
+        <activity
+            android:name="groupo.travellight.app.EventsBag"
+            android:label="EventsBagActivity" >
         </activity>
 
         <activity
@@ -90,6 +94,9 @@
         <activity android:name="groupo.travellight.app.TripActivity"
             android:label="Trips"
             android:icon="@drawable/ic_action_trip">
+            <!-- enable the search widget to send searches to YelpResultsActivity -->
+            <meta-data android:name="android.app.default_searchable"
+                android:value=".YelpResultsActivity" />
         </activity>
     </application>
 

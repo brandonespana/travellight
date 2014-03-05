@@ -8,6 +8,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -67,6 +68,9 @@ public class TripActivity extends ActionBarActivity implements NavigationDrawerF
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 getActionBar().setTitle(mTitle);
+                if (mTitle.equals("Trips")){
+                    Toast.makeText(getApplicationContext(), "Select or create a trip.", Toast.LENGTH_LONG).show();
+                }
                 //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
@@ -133,6 +137,14 @@ public class TripActivity extends ActionBarActivity implements NavigationDrawerF
         showPopUp();
         Toast.makeText(this, "Enter trip name.", Toast.LENGTH_LONG).show();
     }
+    public void gotoEvent(MenuItem item){
+        Intent intent = new Intent(this,EventsBag.class);
+        startActivity(intent);
+    }
+    public void gotoPacking(MenuItem item){
+        Intent intent = new Intent(this,PackingListActivity.class);
+        startActivity(intent);
+    }
     public void removeTrip(MenuItem item){
         if (!getActionBar().getTitle().equals("Trips")){
         showRemove();
@@ -159,6 +171,7 @@ public class TripActivity extends ActionBarActivity implements NavigationDrawerF
 
                 mDrawerList.setAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.popup_layout, trips));
 
+
             }
             else{
                 Toast.makeText(getApplicationContext(), "Trip name exists! Try again.", Toast.LENGTH_LONG).show();
@@ -175,6 +188,7 @@ public class TripActivity extends ActionBarActivity implements NavigationDrawerF
     // Remember, create doesn't show the dialog
     AlertDialog helpDialog = helpBuilder.create();
     helpDialog.show();
+
 }
     private void showRemove() {
         AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
@@ -190,12 +204,15 @@ public class TripActivity extends ActionBarActivity implements NavigationDrawerF
                     f.delete();
                     trips.remove(getActionBar().getTitle());
                     getActionBar().setTitle("Trips");
+                    mTitle = "Trips";
+
                     mDrawerList.setAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.popup_layout, trips));
-                    mDrawerList.setChoiceMode(1);
+                    mDrawerLayout.openDrawer(mDrawerList);
+
 
                 }
                 else{
-                    Toast.makeText(getApplicationContext(), "Trip name exists! Try again.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Trip doesn't exist.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -225,11 +242,20 @@ public class TripActivity extends ActionBarActivity implements NavigationDrawerF
         // Pass the event to ActionBarDrawerToggle, if it returns
         // true, then it has handled the app icon touch event
         if (mDrawerToggle.onOptionsItemSelected(item)) {
+
             return true;
         }
-        // Handle your other action bar items...
+        Log.d("itemid", Integer.toString(item.getItemId()));
+        Log.d("yelp", Integer.toString(R.id.menu_yelpsearch));
+        switch (item.getItemId()) {
+            case R.id.menu_yelpsearch:
+                onSearchRequested(); //call search dialog
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
-        return super.onOptionsItemSelected(item);
+
     }
 
     /**
