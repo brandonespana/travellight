@@ -52,6 +52,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="groupo.travellight.app.EventsBag"
+            android:label="@string/title_activity_events_bag"
+            android:theme="@style/Theme.AppCompat.Light" >
+        </activity>
+
     </application>
 
 </manifest>
