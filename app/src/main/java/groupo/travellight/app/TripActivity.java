@@ -141,6 +141,7 @@ public class TripActivity extends ActionBarActivity implements NavigationDrawerF
         Intent intent = new Intent(this,EventsBag.class);
         startActivity(intent);
     }
+    //comment
     public void gotoPacking(MenuItem item){
         Intent intent = new Intent(this,PackingListActivity.class);
         startActivity(intent);
