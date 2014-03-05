@@ -6,9 +6,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,14 +48,18 @@ public class NotificationsActivity extends ActionBarActivity {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         //TODO: Convert the activities into Fragments for the tabs(Yelp, Packing List, Calendar(not created yet), More )
         ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+            aTestingFragment atf;
+
             @Override
             public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-                Intent newTabIntent = new Intent(this, HelpActivity.class);
+                //Intent newTabIntent = new Intent(this, HelpActivity.class);
+                    atf = new aTestingFragment();
+                    fragmentTransaction.replace(R.id.notifContainer, atf);
             }
 
             @Override
             public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
+                    fragmentTransaction.remove(atf);
             }
 
             @Override
@@ -145,5 +151,16 @@ public class NotificationsActivity extends ActionBarActivity {
         //notifDisplay.setText(message);
         //rl.addView(notifDisplay,params);
     }
+
+    public static class aTestingFragment extends Fragment {
+
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstancedState){
+//            TextView fragText = new TextView(getActivity());
+//                fragText.setText("Testing the framgnet and tabs stuff");
+//            return fragText;
+            return inflater.inflate(R.layout.activity_help_screen, container,false);
+        }
+    }//end fragment class
+
 
 }

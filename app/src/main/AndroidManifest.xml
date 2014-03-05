@@ -39,6 +39,10 @@
             android:name=".PackingListActivity"
             android:label="Packing List" >
             </activity>
+        <activity android:uiOptions="splitActionBarWhenNarrow"
+            android:name="groupo.travellight.tabs.ScreenWithSwitchingTabs">
+
+        </activity>
     </application>
 
 </manifest>
