@@ -25,14 +25,17 @@
         </activity>
         <activity
             android:name="groupo.travellight.app.MainScreen"
+            android:theme="@style/Theme.AppCompat.Light"
             android:label="MainScreen" >
         </activity>
         <activity
             android:name="groupo.travellight.app.HelpActivity"
+            android:theme="@style/Theme.AppCompat.Light"
             android:label="HelpActivity" >
         </activity>
         <activity
             android:name="groupo.travellight.app.NotificationsActivity"
+            android:theme="@style/Theme.AppCompat.Light"
             android:label="Notifications" >
         </activity>
         <activity
@@ -46,7 +49,8 @@
         </activity>
         <activity
             android:name=".PackingListActivity"
-            android:label="Packing List" >
+            android:label="Packing List"
+            android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

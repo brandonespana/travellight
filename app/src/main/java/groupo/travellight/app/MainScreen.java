@@ -36,6 +36,18 @@ public class MainScreen extends ActionBarActivity {
             case R.id.action_home:
                 goToMain();
                 return true;
+            case R.id.action_notifications:
+                goToNotifications();
+                return true;
+            case R.id.action_events_bag:
+                goToEventsBag();
+                return true;
+            case R.id.action_packing_list:
+                goToPackingList();
+                return true;
+            case R.id.action_yelp:
+                goToYelpPage();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -48,6 +60,22 @@ public class MainScreen extends ActionBarActivity {
     }
     public void goToMain(){
         Intent intent = new Intent (this, MainScreen.class);
+        startActivity(intent);
+    }
+    public void goToNotifications(){
+        Intent intent = new Intent(this,NotificationsActivity.class);
+        startActivity(intent);
+    }
+    public void goToEventsBag(){
+        Intent intent = new Intent(this,EventsBag.class);
+        startActivity(intent);
+    }
+    public void goToPackingList(){
+        Intent intent = new Intent(this,PackingListActivity.class);
+        startActivity(intent);
+    }
+    public void goToYelpPage(){
+        Intent intent = new Intent(this,YelpSearch.class);
         startActivity(intent);
     }
 
