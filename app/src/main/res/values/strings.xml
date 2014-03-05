@@ -42,4 +42,8 @@
     <string name = "drawer_close"> Please work</string>
     <string name = "drawer_open"> Please work</string>
 
+    <string name="title_activity_events_bag">EventsBag</string>
+    <string name="My_Events">My Events</string>
+
+
 </resources>

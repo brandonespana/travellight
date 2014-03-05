@@ -38,6 +38,9 @@ public class HelpActivity extends ActionBarActivity{
             case R.id.action_home:
                 goToMain();
                 return true;
+            case R.id.action_notifications:
+                goToNotifications();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
        }
@@ -50,6 +53,10 @@ public class HelpActivity extends ActionBarActivity{
     }
     public void goToHelp(){
         Intent intent = new Intent(this,HelpActivity.class);
+        startActivity(intent);
+    }
+    public void goToNotifications(){
+        Intent intent = new Intent(this,NotificationsActivity.class);
         startActivity(intent);
     }
 }
