@@ -30,6 +30,10 @@
         <activity
             android:name="groupo.travellight.app.MainScreen"
             android:label="MainScreen" >
+
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
         </activity>
 
         <activity
@@ -78,16 +82,16 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name="groupo.travellight.app.PackingListActivity"
+            android:label="Packing List" >
+        </activity>
+
+        <activity android:name="groupo.travellight.app.TripActivity"
+            android:label="Trips"
+            android:icon="@drawable/ic_action_trip">
+        </activity>
     </application>
 
-    <activity
-        android:name="groupo.travellight.app.PackingListActivity"
-        android:label="Packing List" >
-    </activity>
-
-    <activity android:name=".TripActivity"
-        android:label="Trips"
-        android:icon="@drawable/ic_action_trip">
-    </activity>
 
 </manifest>
