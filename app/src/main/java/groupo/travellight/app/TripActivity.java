@@ -1,6 +1,7 @@
 package groupo.travellight.app;
 
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -252,6 +253,11 @@ public class TripActivity extends ActionBarActivity implements NavigationDrawerF
             case R.id.menu_yelpsearch:
                 onSearchRequested(); //call search dialog
                 return true;
+            case R.id.action_friends:
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, new FriendsList());//change add to replace?
+                ft.addToBackStack(null);
+                ft.commit();
             default:
                 return super.onOptionsItemSelected(item);
         }
