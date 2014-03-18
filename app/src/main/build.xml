@@ -1,12 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="LoginActivity" default="help">
-
-    <!-- The local.properties file is created and updated by the 'android' tool.
+<project name="Travellight" default="help">
+<!-- The local.properties file is created and updated by the 'android' tool.
          It contains the path to the SDK. It should *NOT* be checked into
-         Version Control Systems. -->
-    <property file="local.properties" />
-
-    <!-- The ant.properties file can be created by you. It is only edited by the
+         Version Control Systems. --><property file="local.properties"/><!-- The ant.properties file can be created by you. It is only edited by the
          'android' tool to add properties to it.
          This is the place to change some Ant specific build properties.
          Here are some properties you may want to change/update:
@@ -25,19 +20,10 @@
          This file is an integral part of the build system for your
          application and should be checked into Version Control Systems.
 
-         -->
-    <property file="ant.properties" />
-
-    <!-- if sdk.dir was not set from one of the property file, then
+         --><property file="ant.properties"/><!-- if sdk.dir was not set from one of the property file, then
          get it from the ANDROID_HOME env var.
          This must be done before we load project.properties since
-         the proguard config can use sdk.dir -->
-    <property environment="env" />
-    <condition property="sdk.dir" value="${env.ANDROID_HOME}">
-        <isset property="env.ANDROID_HOME" />
-    </condition>
-
-    <!-- The project.properties file is created and updated by the 'android'
+         the proguard config can use sdk.dir --><property environment="env"/><condition property="sdk.dir" value="${env.ANDROID_HOME}"><isset property="env.ANDROID_HOME"/></condition><!-- The project.properties file is created and updated by the 'android'
          tool, as well as ADT.
 
          This contains project specific properties such as project target, and library
@@ -45,16 +31,7 @@
          (or in .classpath for Eclipse projects).
 
          This file is an integral part of the build system for your
-         application and should be checked into Version Control Systems. -->
-    <loadproperties srcFile="project.properties" />
-
-    <!-- quick check on sdk.dir -->
-    <fail
-            message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through the ANDROID_HOME environment variable."
-            unless="sdk.dir"
-    />
-
-    <!--
+         application and should be checked into Version Control Systems. --><loadproperties srcFile="project.properties"/><!-- quick check on sdk.dir --><fail message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through the ANDROID_HOME environment variable." unless="sdk.dir"/><!--
         Import per project custom build rules if present at the root of the project.
         This is the place to put custom intermediary targets such as:
             -pre-build
@@ -65,10 +42,7 @@
             -post-package
             -post-build
             -pre-clean
-    -->
-    <import file="custom_rules.xml" optional="true" />
-
-    <!-- Import the actual build file.
+    --><import file="custom_rules.xml" optional="true"/><!-- Import the actual build file.
 
          To customize existing targets, there are two options:
          - Customize only one target:
@@ -85,8 +59,4 @@
          ***********************
          In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
          in order to avoid having your file be overridden by tools such as "android update project"
-    -->
-    <!-- version-tag: 1 -->
-    <import file="${sdk.dir}/tools/ant/build.xml" />
-
-</project>
+    --><!-- version-tag: 1 --><import file="${sdk.dir}/tools/ant/build.xml"/></project>

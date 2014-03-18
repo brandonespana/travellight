@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Travellight" default='info' basedir="." >
+
+    <presetdef name="ml.javac">
+        <javac includeantruntime="false" />
+    </presetdef>
+
+    <description>
+        ...
+    </description>
+
+    <!-- default property values -->
+    <property environment="env"/>
+    <property name='build' location='build' />
+    <property name='app.version' value='1.0'/>
+    <property name='app.name' value='Travellight'/>
+    <property name='distro-name' value='travellight-${app.version}'/>
+    <property name="java.home" value="${env.JAVA_HOME}"/>
+    <tstamp><format property='build.time' pattern='yyyy-MM-dd HH:mm:ss'/></tstamp>
+
+    <target name="info">
+        <echo>
+            Application : ${app.name} ${app.version}
+            Build File  : ${ant.file} 
+            Run Date    : ${build.time}
+            Run by      : ${user.name}
+            Build Dir   : ${build}
+            Base Dir    : ${basedir}
+            Java Home   : ${java.home}
+	Targets     :
+			clean.app
+			build.app
+			run.app
+        </echo>
+    </target>
+
+    <!-- CLEAN -->
+    <target name="clean.app" >
+        <subant target="clean" genericantfile="./app/src/main/build.xml">
+            <dirset dir="./app/src" includes="main"/>
+        </subant>
+    </target>
+
+    <!-- BUILD -->
+    <target name="build.app">
+        <subant target="debug" genericantfile="./app/src/main/build.xml">
+            <dirset dir="./app/src/" includes="Travellight"/>
+        </subant>
+    </target>
+
+    <!-- RUN CLIENT TESTS -->
+    <target name="run.app">
+        <subant target="emma" genericantfile="./app/src/main/build.xml">
+            <dirset dir="./app/src/" includes="Travellight"/>
+        </subant>
+        <subant target="test" genericantfile="./app/src/main/build.xml">
+            <dirset dir="./app/src/" includes="Travellight"/>
+        </subant>
+    </target>
+
+    <target name="all">
+        <antcall target="info"/>
+        <antcall target="clean.app"/>
+        <antcall target="build.app"/>
+    </target>
+
+</project>
