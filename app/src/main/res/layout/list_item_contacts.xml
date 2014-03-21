@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/contact_display_name"
+        android:textSize="25dp"
+        android:background="#32f"
+        android:hint="Display Name goes here"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <TextView
+        android:id="@+id/contact_email_address"
+        android:textSize="20dp"
+        android:background="#433"
+        android:hint="Email goes here"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+</LinearLayout>
