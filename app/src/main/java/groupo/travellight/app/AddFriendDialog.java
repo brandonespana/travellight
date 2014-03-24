@@ -19,6 +19,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import groupo.travellight.app.R;
 
 /**
@@ -56,7 +58,7 @@ public class AddFriendDialog extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View view =inflater.inflate(R.layout.add_friend_dialog, null);
         builder.setView(view);
@@ -110,9 +112,10 @@ public class AddFriendDialog extends DialogFragment{
             public void onClick(DialogInterface dialog, int id) {
                 //callback.clickedNegative();
 
-                dialog.dismiss();
+                dialog.dismiss();//UNCOMMENT THIS LATER
             }
         });//end NEGATIVE button
+
 
         AlertDialog dialog = builder.create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -128,7 +131,10 @@ public class AddFriendDialog extends DialogFragment{
 
     public interface AddFriendDialogListener {
         public void clickedPositive(String name,String email,int position, boolean editing);
+        public void choseContactFriends(ArrayList<Friend> contactFriends);
 
     }
+
+
 
 }

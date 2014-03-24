@@ -1,10 +1,7 @@
 package groupo.travellight.app;
 
-import android.app.AlertDialog;
-import android.app.Fragment;
 import android.app.ListFragment;
-import android.app.Service;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -13,39 +10,25 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
-import groupo.travellight.app.R;
 
 /**
  * Created by Brandon on 3/13/14.
  */
 
-public class FriendsList extends ListFragment implements AddFriendDialog.AddFriendDialogListener {
+public class FriendsList extends ListFragment implements ChooseAddMethodDialog.ChooseAddMethodDialogListener, AddFriendDialog.AddFriendDialogListener {
     private ListView lv;
-    private ArrayList<Friend> listOfFriends;            //new array of Friend objects
+    private ArrayList<Friend> listOfFriends;
     private FriendAdapter adapter;
     private MenuInflater inflateer;
-    private String filename;//to save the friends list
+    private String filename;
     private File file;
 
     @Override
@@ -92,6 +75,9 @@ public class FriendsList extends ListFragment implements AddFriendDialog.AddFrie
                 info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
                 getFriendInfo(info.position);
                 return true;
+            case R.id.context_send_email:
+                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                sendFriendEmail(info.position);
             default:
                 return true;
         }
@@ -104,7 +90,6 @@ public class FriendsList extends ListFragment implements AddFriendDialog.AddFrie
             case R.id.actionAddfriend:
                 popupDialog();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -112,7 +97,9 @@ public class FriendsList extends ListFragment implements AddFriendDialog.AddFrie
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instancedState){
-        listOfFriends=readListFromFile();
+        try{listOfFriends=readListFromFile();}
+        catch(Exception e){listOfFriends = new ArrayList<>();}
+
         View rootView = inflater.inflate(R.layout.friends_fragment,container,false);
         lv = (ListView) rootView.findViewById(android.R.id.list);
         adapter = new FriendAdapter(this.getActivity(),R.layout.individual_list_item_friends, listOfFriends);
@@ -122,23 +109,19 @@ public class FriendsList extends ListFragment implements AddFriendDialog.AddFrie
         return rootView;
     }
 
-
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         l.showContextMenuForChild(v);
-//        Toast.makeText(getActivity().getApplicationContext(),
-//                "Clicked ListItem Number " + position, Toast.LENGTH_LONG)
-//                .show();
     }
 
     public void addFriend(String name, String email){
-        Friend newFriend = new Friend(name, email, 1);//*
-        listOfFriends.add(newFriend);//*
-        saveListToFile(listOfFriends);//*
+        Friend newFriend = new Friend(name, email, 1);
+        listOfFriends.add(newFriend);
+        saveListToFile(listOfFriends);
         adapter.notifyDataSetChanged();
     }
 
-    public void removeFriend(int position){//used to be removeFriend(String, String)
+    public void removeFriend(int position){
         listOfFriends.remove(position);
         saveListToFile(listOfFriends);
         adapter.notifyDataSetChanged();
@@ -148,6 +131,13 @@ public class FriendsList extends ListFragment implements AddFriendDialog.AddFrie
         String currentName = listOfFriends.get(position).getName();
         popupEditDialog(currentName, currentEmail,position);
     }
+    public void sendFriendEmail(int position){
+        String currentEmail =listOfFriends.get(position).getEmail();
+        String currentName = listOfFriends.get(position).getName();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_EMAIL,new String[]{currentEmail});
+        startActivity(intent);
+    }
     public void editFriend(String name, String email, int position){
         listOfFriends.get(position).setName(name);
         listOfFriends.get(position).setEmail(email);
@@ -156,9 +146,10 @@ public class FriendsList extends ListFragment implements AddFriendDialog.AddFrie
     }
 
     public void popupDialog(){
-        AddFriendDialog dialog = new AddFriendDialog();
-        dialog.setTargetFragment(this, 0);
-        dialog.show(this.getFragmentManager(), "add popup");
+        ChooseAddMethodDialog dialog = new ChooseAddMethodDialog();
+        dialog.setTargetFragment(this,0);
+        dialog.show(this.getFragmentManager(),"choose add method");
+
     }
 
     public void popupEditDialog(String name, String email, int position){
@@ -167,7 +158,7 @@ public class FriendsList extends ListFragment implements AddFriendDialog.AddFrie
         dialog.show(this.getFragmentManager(), "edit popup");
     }
 
-    private void saveListToFile(ArrayList<Friend> listOfFriends) {//used to take ArrayList<String> listOfStuffas parameter type
+    private void saveListToFile(ArrayList<Friend> listOfFriends) {
         try {
 
             file = new File(getActivity().getFilesDir(), filename);
@@ -181,7 +172,7 @@ public class FriendsList extends ListFragment implements AddFriendDialog.AddFrie
         }
     }
 
-    private ArrayList<Friend> readListFromFile(){//used to return ArrayList<String>
+    private ArrayList<Friend> readListFromFile(){
         ArrayList<Friend> listOfFriendObjs = new ArrayList<Friend>();
 
         try {
@@ -198,11 +189,25 @@ public class FriendsList extends ListFragment implements AddFriendDialog.AddFrie
 
     }
 
-    //AddFriendDialogListener interface implementation:
     @Override
     public void clickedPositive(String name, String email,int position, boolean editing){
         if (editing) editFriend(name,email,position);
         else addFriend(name, email);
     }
 
+    @Override
+    public void choseContactFriends(ArrayList<Friend> contactFriends){}
+
+    @Override
+    public void choseManually(String name, String email, int position, boolean editing){
+        if (editing) editFriend(name,email,position);
+        else addFriend(name, email);
+    }
+
+    @Override
+    public void choseImportContacts(ArrayList<Friend> contactFriends){
+        listOfFriends.addAll(contactFriends);
+        adapter.notifyDataSetChanged();
+        saveListToFile(listOfFriends);
+    }
 }

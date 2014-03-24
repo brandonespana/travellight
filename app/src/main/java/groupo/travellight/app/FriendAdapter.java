@@ -17,15 +17,22 @@ import java.util.ArrayList;
  */
 public class FriendAdapter extends ArrayAdapter<Friend> {
 
-    Context context;
-    int layoutResourceId;
-    ArrayList<Friend> data= null;
+    private Context context;
+    private int layoutResourceId;
+    private ArrayList<Friend> data= null;
 
     public FriendAdapter(Context context, int layoutResourceId, ArrayList<Friend> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+    }
+
+    @Override
+    public Friend getItem(int position){
+        Friend friend= data.get(position);
+
+        return friend;
     }
 
     @Override
@@ -52,9 +59,11 @@ public class FriendAdapter extends ArrayAdapter<Friend> {
 
         Friend friend = data.get(position);
         //holder.icon.setImageResource(friend.getPortrait());
-        holder.icon.setImageResource(R.drawable.ic_action_person);
-        holder.name.setText(friend.getName());
-        holder.email.setText(friend.getEmail());
+        try {
+            holder.icon.setImageResource(R.drawable.ic_action_person);
+            holder.name.setText(friend.getName());
+            holder.email.setText(friend.getEmail());
+        }catch (Exception e){System.out.print("some error ocurred");}
 
         return row;
     }

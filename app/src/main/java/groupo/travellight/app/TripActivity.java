@@ -259,11 +259,6 @@ public class TripActivity extends ActionBarActivity implements NavigationDrawerF
                 ft.addToBackStack(null);
                 ft.commit();
                 return true;
-            case R.id.action_contacts:
-                FragmentTransaction f = getFragmentManager().beginTransaction();
-                f.replace(R.id.content_frame, new ContactsList());//change add to replace?
-                f.addToBackStack(null);
-                f.commit();
             default:
                 return super.onOptionsItemSelected(item);
         }
