@@ -2,6 +2,7 @@ package groupo.travellight.app;
 
 import android.app.ListFragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -132,11 +135,29 @@ public class FriendsList extends ListFragment implements ChooseAddMethodDialog.C
         popupEditDialog(currentName, currentEmail,position);
     }
     public void sendFriendEmail(int position){
+
         String currentEmail =listOfFriends.get(position).getEmail();
         String currentName = listOfFriends.get(position).getName();
+
+//        String path=getActivity().getFilesDir()+File.separator+filename;
+//        File fileToSend=new File(path);
+//        Uri uriToSend= Uri.fromFile(fileToSend);
+
         Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("message/rfc822");
         intent.putExtra(Intent.EXTRA_EMAIL,new String[]{currentEmail});
-        startActivity(intent);
+        intent.putExtra(Intent.EXTRA_SUBJECT,"TRAVELLIGHT - Friends List");
+        intent.putExtra(Intent.EXTRA_TEXT, "Friends List is attached, hopefully");
+        intent.putExtra(Intent.EXTRA_STREAM,Uri.parse("content://" + FileContentProvider.AUTHORITY + "/"
+                + filename));
+
+        try {
+            startActivity(Intent.createChooser(intent, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this.getActivity(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+        //getActivity().startActivity(Intent.createChooser(intent,"Choose one of the following:"));
+        //getActivity().startActivity(intent);
     }
     public void editFriend(String name, String email, int position){
         listOfFriends.get(position).setName(name);
