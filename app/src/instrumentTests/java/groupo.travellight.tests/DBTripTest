@@ -1,5 +1,6 @@
 package groupo.travellight.tests;
 
+import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import junit.framework.TestCase;
@@ -14,10 +15,11 @@ public class DBTripTest extends TestCase {
     public void setUp() throws Exception {
         super.setUp();
     }
-
     @SmallTest
-    public void testAMethod(){
-
+    public void test() throws Exception {
+        final int expected = 1;
+        final int reality = 5;
+        assertEquals(expected, reality);
     }
 
     @Override

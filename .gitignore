@@ -22,9 +22,7 @@ local.properties
 # Android Studio
 .idea/
 .gradle
-gradlew
-gradlew.bat
-gradel.properties
+gradle.properties
 /*/local.properties
 /*/out
 /*/*/build
