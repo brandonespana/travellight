@@ -7,31 +7,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
-
+import java.util.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-/**
- * Created by Brandon on 3/26/14.
- */
-
-
-        import android.content.ContentProvider;
-        import android.content.ContentValues;
-        import android.content.UriMatcher;
-        import android.database.Cursor;
-        import android.net.Uri;
-        import android.os.ParcelFileDescriptor;
-        import android.util.Log;
-
-        import java.io.File;
-        import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Created by Brandon on 3/25/14.
- */
 public class FileContentProvider extends ContentProvider {
 
     private static final String CLASS_NAME = "FileContentProvider";
@@ -68,7 +47,6 @@ public class FileContentProvider extends ContentProvider {
     @Override
     public String getType (Uri uri){
         return null;
-        //return "message/rfc822";
     }
 
     @Override
