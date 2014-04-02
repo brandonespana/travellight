@@ -31,10 +31,8 @@ public class ChooseAddMethodDialog extends DialogFragment implements AddFriendDi
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View view =inflater.inflate(R.layout.individual_list_item_friends, null);//change layout
-        builder.setView(view);
 
+        builder.setTitle("How would you like to add your friend? ");
         builder.setPositiveButton("From Contacts", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

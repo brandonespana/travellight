@@ -3,10 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-
-
-    >
+    android:orientation="vertical">
 
     <TextView android:id="@+id/txtHeader"
         android:layout_width="fill_parent"
@@ -16,13 +13,12 @@
         android:textSize="40dp"
         android:textColor="#FFFFFF"
         android:text="Your Friends"
-        android:background="#31506D"
+        android:background="#ff8f9195"
         android:paddingLeft="5dp"/>
 
     <ListView
         android:id="@id/android:list"
         android:choiceMode="singleChoice"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
@@ -41,7 +37,6 @@
         android:text="No Friends :("
         android:textSize="25dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        />
+        android:layout_marginTop="30dp" />
 
 </RelativeLayout>

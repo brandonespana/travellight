@@ -31,7 +31,6 @@ public class FriendAdapter extends ArrayAdapter<Friend> {
     @Override
     public Friend getItem(int position){
         Friend friend= data.get(position);
-
         return friend;
     }
 
@@ -53,12 +52,10 @@ public class FriendAdapter extends ArrayAdapter<Friend> {
             row.setTag(holder);
         }
         else
-        {
-            holder = (FriendHolder)row.getTag();
+        { holder = (FriendHolder)row.getTag();
         }
 
         Friend friend = data.get(position);
-        //holder.icon.setImageResource(friend.getPortrait());
         try {
             holder.icon.setImageResource(R.drawable.ic_action_person);
             holder.name.setText(friend.getName());

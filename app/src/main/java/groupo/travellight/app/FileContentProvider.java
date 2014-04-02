@@ -26,6 +26,8 @@ import java.io.FileNotFoundException;
 
         import java.io.File;
         import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Brandon on 3/25/14.
@@ -65,22 +67,26 @@ public class FileContentProvider extends ContentProvider {
 
     @Override
     public String getType (Uri uri){
-        return "text/rfc822";
+        return null;
+        //return "message/rfc822";
     }
 
     @Override
     public ParcelFileDescriptor openFile (Uri uri, String mode) throws FileNotFoundException {
+        List<String> uriSegments = uri.getPathSegments();
+        String secondLastSeg="";
+        for (int i=uriSegments.size()-1;i>=0;i--){
+            if (uriSegments.get(i).contains("@")){secondLastSeg=uriSegments.get(i);}
+        }
         String LOG_TAG = CLASS_NAME + " - openFile";
 
         Log.v(LOG_TAG,
                 "Called with uri: '" + uri + "'." + uri.getLastPathSegment());
         ParcelFileDescriptor pfd;
-        String fileLocation = getContext().getFilesDir() + File.separator + uri.getLastPathSegment();
+        String fileLocation = getContext().getFilesDir() + File.separator + secondLastSeg+File.separator+uri.getLastPathSegment().toString();
+
         pfd = ParcelFileDescriptor.open(new File(
                 fileLocation), ParcelFileDescriptor.MODE_READ_ONLY);
         return pfd;
-
-
-
     }
 }

@@ -30,10 +30,8 @@
         android:onClick="gotoEvent"
         android:showAsAction="ifRoom"/>
     <item android:id="@+id/action_friends"
-        android:title="Friends Fragment"
+        android:title="Share/Friends"
         android:showAsAction="ifRoom"/>
-    <item android:id="@+id/action_contacts"
-        android:title="Temp Contacts"/>
 
 
 

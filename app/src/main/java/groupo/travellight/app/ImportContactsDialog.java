@@ -50,15 +50,18 @@ public class ImportContactsDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
+
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View rootView = inflater.inflate(R.layout.activity_my_own_contacts, null);
         contactsList = (ListView) rootView.findViewById(R.id.contacts_list);
         contactsList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        final ListAdapter adapter = displayContacts();
+        final ListAdapter adapter = retrieveContacts();
         contactsList.setAdapter(adapter);
+
         contactsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position,long id){
+
                 TextView nameView = (TextView)viewClicked.findViewById(R.id.contact_display_name);
                 TextView emailView = (TextView)viewClicked.findViewById(R.id.contact_email_address);
                 CheckBox checkBox = (CheckBox) viewClicked.findViewById(R.id.contact_checkbox);
@@ -75,6 +78,7 @@ public class ImportContactsDialog extends DialogFragment {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(rootView);
+        builder.setTitle("Your contacts with emails");
         builder.setPositiveButton("Add Selected", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -82,30 +86,24 @@ public class ImportContactsDialog extends DialogFragment {
                         String [] strings= tempList.get(index).split("::");
                         String name = strings[0];
                         String email = strings[1];
-                        selectedContacts.add(new Friend(name, email, 0));
+                        selectedContacts.add(new Friend(name, email));
                     }
 
                 callback.choseContactFriends(selectedContacts);
-                Toast.makeText(getActivity().getApplicationContext(),
-                        "Clicked Add", Toast.LENGTH_SHORT)
-                        .show();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(getActivity().getApplicationContext(),
-                        "Clicked Cancel", Toast.LENGTH_SHORT)
-                        .show();
+                //do nothing, dialog closes
             }
         });
 
         AlertDialog dialog = builder.create();
-        //dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         return dialog;
     }
 
-    private SimpleCursorAdapter displayContacts(){
+    private SimpleCursorAdapter retrieveContacts(){
         //selecting the columns in contacts table
         String [] projection = new String[]{
                 ContactsContract.RawContacts._ID,

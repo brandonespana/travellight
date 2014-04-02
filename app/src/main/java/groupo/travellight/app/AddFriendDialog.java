@@ -1,17 +1,11 @@
 package groupo.travellight.app;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.provider.Telephony;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,8 +14,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
-import groupo.travellight.app.R;
 
 /**
  * Created by Brandon on 3/14/14.
@@ -63,8 +55,6 @@ public class AddFriendDialog extends DialogFragment{
         final View view =inflater.inflate(R.layout.add_friend_dialog, null);
         builder.setView(view);
 
-
-
         em=(EditText) view.findViewById(R.id.input_friend_email);
         et=(EditText) view.findViewById(R.id.input_friend_name);
 
@@ -102,20 +92,15 @@ public class AddFriendDialog extends DialogFragment{
                     callback.clickedPositive(inName,inEmail,position, editing);
                     dialog.dismiss();
                 }
-
-
-                //dialog.show();
             }
-        });//END POSITIVIE button
+        });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                //callback.clickedNegative();
 
-                dialog.dismiss();//UNCOMMENT THIS LATER
+                dialog.dismiss();
             }
-        });//end NEGATIVE button
-
+        });
 
         AlertDialog dialog = builder.create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -134,7 +119,4 @@ public class AddFriendDialog extends DialogFragment{
         public void choseContactFriends(ArrayList<Friend> contactFriends);
 
     }
-
-
-
 }

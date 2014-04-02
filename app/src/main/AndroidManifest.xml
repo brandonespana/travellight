@@ -15,7 +15,7 @@
         <provider
             android:name="FileContentProvider"
             android:authorities="groupo.travellight.app.FileContentProvider"
-            android:exported="false"
+            android:exported="true"
             android:grantUriPermissions="true">
         </provider>
 

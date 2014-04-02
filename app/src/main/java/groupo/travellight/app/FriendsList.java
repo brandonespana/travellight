@@ -1,9 +1,11 @@
 package groupo.travellight.app;
 
 import android.app.ListFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,9 +17,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -33,11 +39,17 @@ public class FriendsList extends ListFragment implements ChooseAddMethodDialog.C
     private MenuInflater inflateer;
     private String filename;
     private File file;
+    private String userEmail;
+    private String shareFileName;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         filename="ListOfFriends.txt";
+        shareFileName="";
+        Intent in = getActivity().getIntent();
+        Bundle b = in.getExtras();
+        userEmail = b.getString("LOGIN_EMAIL");
         setHasOptionsMenu(true);
     }
 
@@ -63,7 +75,6 @@ public class FriendsList extends ListFragment implements ChooseAddMethodDialog.C
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu,view,menuInfo);
         inflateer.inflate(R.menu.friends_list_context_menu,menu);
-
     }
 
     @Override
@@ -100,8 +111,7 @@ public class FriendsList extends ListFragment implements ChooseAddMethodDialog.C
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instancedState){
-        try{listOfFriends=readListFromFile();}
-        catch(Exception e){listOfFriends = new ArrayList<>();}
+        listOfFriends=readListFromFile();
 
         View rootView = inflater.inflate(R.layout.friends_fragment,container,false);
         lv = (ListView) rootView.findViewById(android.R.id.list);
@@ -118,7 +128,7 @@ public class FriendsList extends ListFragment implements ChooseAddMethodDialog.C
     }
 
     public void addFriend(String name, String email){
-        Friend newFriend = new Friend(name, email, 1);
+        Friend newFriend = new Friend(name, email);
         listOfFriends.add(newFriend);
         saveListToFile(listOfFriends);
         adapter.notifyDataSetChanged();
@@ -137,40 +147,43 @@ public class FriendsList extends ListFragment implements ChooseAddMethodDialog.C
     public void sendFriendEmail(int position){
 
         String currentEmail =listOfFriends.get(position).getEmail();
-        String currentName = listOfFriends.get(position).getName();
+        //this file is temporary, it only contains the current selected trip's name
+        shareFileName="My trip to "+ getActivity().getActionBar().getTitle().toString()+".txt";
+        File shareFile = new File(getActivity().getFilesDir(), userEmail+File.separator+shareFileName);
 
-//        String path=getActivity().getFilesDir()+File.separator+filename;
-//        File fileToSend=new File(path);
-//        Uri uriToSend= Uri.fromFile(fileToSend);
+        try{
+            FileOutputStream fos = new FileOutputStream (shareFile);
+            fos.write("Hello Friend, i'm going on a trip!!".getBytes());
+            fos.close();
+            }
+        catch(FileNotFoundException e){e.printStackTrace();}
+        catch(IOException ioe){ioe.printStackTrace();}
 
+        //send intent to email apps
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
         intent.putExtra(Intent.EXTRA_EMAIL,new String[]{currentEmail});
-        intent.putExtra(Intent.EXTRA_SUBJECT,"TRAVELLIGHT - Friends List");
-        intent.putExtra(Intent.EXTRA_TEXT, "Friends List is attached, hopefully");
-        intent.putExtra(Intent.EXTRA_STREAM,Uri.parse("content://" + FileContentProvider.AUTHORITY + "/"
-                + filename));
+        intent.putExtra(Intent.EXTRA_SUBJECT,"TRAVELLIGHT -Sharing a Trip");
+        intent.putExtra(Intent.EXTRA_TEXT, "File is attached");
+        intent.putExtra(Intent.EXTRA_STREAM,Uri.parse("content://groupo.travellight.app.FileContentProvider"+File.separator+userEmail+File.separator+shareFileName));
 
         try {
             startActivity(Intent.createChooser(intent, "Send mail..."));
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(this.getActivity(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
         }
-        //getActivity().startActivity(Intent.createChooser(intent,"Choose one of the following:"));
-        //getActivity().startActivity(intent);
+
     }
     public void editFriend(String name, String email, int position){
         listOfFriends.get(position).setName(name);
         listOfFriends.get(position).setEmail(email);
         adapter.notifyDataSetChanged();
-
     }
 
     public void popupDialog(){
         ChooseAddMethodDialog dialog = new ChooseAddMethodDialog();
         dialog.setTargetFragment(this,0);
         dialog.show(this.getFragmentManager(),"choose add method");
-
     }
 
     public void popupEditDialog(String name, String email, int position){
@@ -181,14 +194,13 @@ public class FriendsList extends ListFragment implements ChooseAddMethodDialog.C
 
     private void saveListToFile(ArrayList<Friend> listOfFriends) {
         try {
-
-            file = new File(getActivity().getFilesDir(), filename);
+            file = new File(getActivity().getFilesDir(), userEmail+File.separator+filename);
             FileOutputStream fos = new FileOutputStream (file);
             ObjectOutputStream os = new ObjectOutputStream ( fos );
             os.writeObject ( listOfFriends );
             fos.close();
             os.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -197,17 +209,23 @@ public class FriendsList extends ListFragment implements ChooseAddMethodDialog.C
         ArrayList<Friend> listOfFriendObjs = new ArrayList<Friend>();
 
         try {
-            FileInputStream fis =new FileInputStream(getActivity().getFilesDir()+File.separator+filename);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            listOfFriendObjs = (ArrayList<Friend>) ois.readObject();
-            fis.close();
-            ois.close();
+                FileInputStream fis = new FileInputStream(getActivity().getFilesDir() + File.separator+userEmail+File.separator + filename);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                listOfFriendObjs = (ArrayList<Friend>) ois.readObject();
+                fis.close();
+                ois.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();System.out.println("Error?");
+        } catch (FileNotFoundException e) {
+            saveListToFile(listOfFriendObjs);//will create the file if it doesn't exist, saving an empty array of friends
+            e.printStackTrace();
+        }
+        catch(ClassNotFoundException ce){
+            ce.printStackTrace();
+        }
+        catch(IOException ioe){
+            ioe.printStackTrace();
         }
         return listOfFriendObjs;
-
     }
 
     @Override

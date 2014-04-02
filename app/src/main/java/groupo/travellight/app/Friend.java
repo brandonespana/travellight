@@ -8,19 +8,15 @@ import java.io.Serializable;
 public class Friend implements Serializable {
     private int portrait;
     private String name;
-    private String age;
     private String email;
-    private long friendId;
 
     public Friend(){
         name="Unknown";
-        age="Unknown";
         email="Unknown";
     }
-    public Friend(String name,  String email, long id){
+    public Friend(String name,  String email){
         this.name=name;
         this.email=email;
-        this.friendId=id;
     }
 
     public String toString(){
@@ -28,15 +24,10 @@ public class Friend implements Serializable {
         return friend;
     }
 
-
     public int getPortrait(){return portrait;}
 
     public String getName() {
         return name;
-    }
-
-    public String getAge() {
-        return age;
     }
 
     public String getEmail() {
@@ -49,5 +40,4 @@ public class Friend implements Serializable {
     public void setEmail(String email){
         this.email = email;
     }
-
 }
